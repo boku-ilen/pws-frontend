@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="height: 60vh; width: 60vw;">
+  <div class="container" style="height: 60vh; width: 100vw;">
     <l-map
       ref="map"
       :zoom=zoom
@@ -13,6 +13,7 @@
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">
           <l-icon>
             <map-icon
+              v-if="loaded"
               :name="table.name"
               :latLon="[table.location_lat, table.location_lon]"
               :ports="table.ports"
@@ -42,6 +43,7 @@
 
     data() {
       return {
+        loaded: false,
         zoom: 12,
         maxZoom: 19,
         tables: [],
@@ -54,6 +56,7 @@
       tables_unvariables = await tables_unvariables.json()
       
       this.tables = tables_unvariables
+      this.loaded = true
     },
 
     computed: {

@@ -1,12 +1,12 @@
 <template>
     <svg 
         xmlns="http://www.w3.org/2000/svg"
-        width="70" height="70" fill="currentColor" class="bi bi-battery" viewBox="0 0 50 30" 
+        width="70" height="70" class="bi bi-battery" viewBox="0 0 50 30" 
         transform="translate(-24 -55)"
         @click="transition()"
     >
     <svg> 
-        <g>
+        <g v-if="loaded">
             <path transform="translate(10 15)" fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
             <path v-for="pathColor in getBatteryIcon" :style="pathColor.color" :key="pathColor.path" :d="pathColor.path" transform="translate(10 0)"/>
             <path v-if="isCharging" :d="chargingSvgPath" transform="translate(10 0)" style="fill:yellow"/>
@@ -22,16 +22,20 @@ export default {
     props: {
         name: String,
         latLon: Array,
-        batteryCharge: Number,
-        pvCharge: Number,
         ports: Array,
-        portUsage: Array,
-        weatherState: String,
+        id: Number
     },
 
     data() {
       return {
-        //portUsage: [false, false, true],
+        serverUrl: "http://192.168.0.165:8000",
+        loaded: false,
+
+        batteryCharge: Number,
+        pvCharge: Number,
+        portUsage: Array,
+        weatherState: String,
+
         criticalColor: "red",
         optimalColor: "green",
         defaultColor: "black",
@@ -52,7 +56,17 @@ export default {
       }
     },
 
-    mounted() {
+    async mounted() {
+        let table_variable = await fetch(`${this.serverUrl}/tables/latest/${this.id}`)
+        table_variable = await table_variable.json()
+        this.portUsage = table_variable.port_usage
+        this.batteryCharge = table_variable.battery_charge
+        this.pvCharge = table_variable.energy_production
+        //FIXME: get weather state properly
+        let temp = Object.keys(this.weatherStates)
+        this.weatherState = temp[Math.floor(Math.random() * temp.length)]
+
+        this.loaded = true
     },
 
     computed: {
