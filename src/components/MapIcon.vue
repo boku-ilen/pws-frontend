@@ -28,7 +28,6 @@ export default {
 
     data() {
       return {
-        serverUrl: "http://192.168.0.165:8000",
         loaded: false,
 
         batteryCharge: Number,
@@ -57,7 +56,7 @@ export default {
     },
 
     async mounted() {
-        let table_variable = await fetch(`${this.serverUrl}/tables/latest/${this.id}`)
+        let table_variable = await fetch(`/tables/latest/${this.id}`)
         table_variable = await table_variable.json()
         this.portUsage = table_variable.port_usage
         this.batteryCharge = table_variable.battery_charge

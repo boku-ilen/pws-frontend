@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="height: 60vh; width: 100vw;">
+  <div class="container" style="height: 60vh; width: 100%;">
     <l-map
       ref="map"
       :zoom=zoom
@@ -47,12 +47,11 @@
         zoom: 12,
         maxZoom: 19,
         tables: [],
-        serverUrl: "http://192.168.0.165:8000", 
       };
     },
 
     async mounted() {
-      let tables_unvariables = await fetch(`${this.serverUrl}/tables/all`)
+      let tables_unvariables = await fetch(`/tables/all`)
       tables_unvariables = await tables_unvariables.json()
       
       this.tables = tables_unvariables
