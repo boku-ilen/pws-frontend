@@ -1,18 +1,24 @@
 <template>
-  <div class="container" style="height: 40vh; width: 40vw;">
+  <div class="container" style="height: 60vh; width: 60vw;">
     <l-map
       ref="map"
       :zoom=zoom
       :max-zoom=maxZoom
       :bounds=getBounds
-      :center=centerVienna
     >
       <l-tile-layer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"        
       ></l-tile-layer>
-      <l-feature-group v-for="(location, index) in locations" :key="index">
-        <l-marker :lat-lng="location">
-          <l-icon><map-icon/></l-icon>
+      <l-feature-group v-for="(table, index) in tables" :key="index">
+        <l-marker :lat-lng="[table.location_lon, table.location_lat]">
+          <l-icon>
+            <map-icon
+              :name="table.name"
+              :latLon="[table.location_lat, table.location_lon]"
+              :ports="table.ports"
+              :id="table.id"
+            />
+          </l-icon>
         </l-marker>
       </l-feature-group>
     </l-map>
@@ -33,32 +39,37 @@
       LIcon,
       MapIcon
     },
+
     data() {
       return {
         zoom: 12,
         maxZoom: 19,
-        // FIXME: fetch real/mocked data
-        locations: [[48.17849, 16.37208], [48.20949, 16.37408], [48.20859, 16.41238]],
-        centerVienna: [48.2084, 16.37208]
+        tables: [],
+        serverUrl: "http://192.168.0.165:8000", 
       };
     },
-    mounted() {
-      // FIXME: this should actually work but does not (probably a version thing)
-      //this.$refs.map.mapObject.fitBounds(this.getBounds)
+
+    async mounted() {
+      let tables_unvariables = await fetch(`${this.serverUrl}/tables/all`)
+      tables_unvariables = await tables_unvariables.json()
+      
+      this.tables = tables_unvariables
     },
+
     computed: {
       getBounds() {
         let min = [ 
-          Math.min(... this.locations.map(latlon => latlon[0])),
-          Math.min(... this.locations.map(latlon => latlon[1])) 
+          Math.min(... this.tables.map(table => table.location_lon)),
+          Math.min(... this.tables.map(table => table.location_lat)) 
         ]
         let max = [ 
-          Math.max(... this.locations.map(latlon => latlon[0])),
-          Math.max(... this.locations.map(latlon => latlon[1])) 
+          Math.max(... this.tables.map(table => table.location_lon)),
+          Math.max(... this.tables.map(table => table.location_lat)) 
         ]
         return [ min, max ]
       },
     },
+
     methods: {
     },
   };
