@@ -12,13 +12,16 @@
       <l-feature-group v-for="(table, index) in tables" :key="index">
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">
           <l-icon>
-            <map-icon
-              v-if="loaded"
-              :name="table.name"
-              :latLon="[table.location_lat, table.location_lon]"
-              :ports="table.ports"
-              :id="table.id"
-            />
+            <router-link to="/table">
+              <map-icon
+                v-if="loaded"
+                :name="table.name"
+                :latLon="[table.location_lat, table.location_lon]"
+                :ports="table.ports"
+                :id
+                ="table.id"
+              />
+            </router-link>
           </l-icon>
         </l-marker>
       </l-feature-group>

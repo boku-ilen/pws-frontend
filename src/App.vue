@@ -6,17 +6,16 @@
     <li> Annorak </li>
     <li> Ananas </li>
   </ul>
-  <Map/>
+  <router-view />
 </template>
 
 <script>
-import Map from "./components/OverviewMap.vue"
+
 import Intro from "./components/OverviewIntro.vue"
 
 export default {
   name: "App",
   components: {
-    Map,
     Intro
   }
 }
