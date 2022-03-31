@@ -1,28 +1,26 @@
 <template>
-  <Intro/>
+  <Intro />
   <ul>
-    <li> Kojak </li>
-    <li> Kajak </li>
-    <li> Annorak </li>
-    <li> Ananas </li>
+    <li>Kojak</li>
+    <li>Kajak</li>
+    <li>Annorak</li>
+    <li>Ananas</li>
   </ul>
   <router-view />
 </template>
 
 <script>
-
-import Intro from "./components/OverviewIntro.vue"
+import Intro from "./components/OverviewIntro.vue";
 
 export default {
   name: "App",
   components: {
-    Intro
-  }
-}
+    Intro,
+  },
+};
 </script>
 
 <style>
-@import '~mdb-ui-kit/css/mdb.min.css';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
