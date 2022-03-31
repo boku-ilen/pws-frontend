@@ -7,7 +7,7 @@
       <l-feature-group v-for="(table, index) in tables" :key="index">
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">
           <l-icon>
-            <router-link to="/table">
+            <router-link :to="{ path: '/table/'+ table.id}">
               <map-icon
                 :name="table.name"
                 :latLon="[table.location_lat, table.location_lon]"

@@ -9,7 +9,7 @@ const routes = [
     component: StartPage,
   },
   {
-    path: "/table",
+    path: "/table/:id",
     name: "TableDetail",
     component: TableDetail,
   },
