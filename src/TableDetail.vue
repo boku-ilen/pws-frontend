@@ -3,14 +3,14 @@
     <h1>ParkWorkingSpace {{ table.name }}</h1>
     <div>
       Derzeit
-      <span v-if="number_of_free_usb == total_usb">sind alle</span>
+      <span v-if="number_of_free_usb == number_of_total_usb">sind alle</span>
       <span v-else-if="number_of_free_usb > 1"
         >sind {{ number_of_free_usb }} von</span
       >
       <span v-else-if="number_of_free_usb == 1">ist einer von</span>
-      <span v-else>ist keiner von</span> {{ total_usb }} USB-Steckern frei. Von
-      den {{ total_qi }} Qi-Ladestationen
-      <span v-if="number_of_free_qi == total_qi">sind alle</span>
+      <span v-else>ist keiner von</span> {{ number_of_total_usb }} USB-Steckern
+      frei. Von den {{ number_of_total_qi }} Qi-Ladestationen
+      <span v-if="number_of_free_qi == number_of_total_qi">sind alle</span>
       <span v-else-if="number_of_free_qi > 1"
         >sind {{ number_of_free_qi }}</span
       >
@@ -38,8 +38,8 @@ export default {
   data: function () {
     return {
       loaded: false,
-      total_usb: 0,
-      total_qi: 0,
+      number_of_total_usb: 0,
+      number_of_total_qi: 0,
       number_of_free_usb: 0,
       number_of_free_qi: 0,
       table_type: this.$route.params.id,
@@ -60,13 +60,13 @@ export default {
         // Count number of (free) ports
         for (const [id, discharge] of this.latest["port_usage"].entries()) {
           if (table.ports[id] == "USB") {
-            this.total_usb += 1;
+            this.number_of_total_usb += 1;
 
             if (discharge < 0.1) {
               this.number_of_free_usb += 1;
             }
           } else {
-            this.total_qi += 1;
+            this.number_of_total_qi += 1;
 
             if (discharge < 0.1) {
               this.number_of_free_qi += 1;
