@@ -1,7 +1,7 @@
 <template>
   <h1>Working Spaces</h1>
-  <div class="row">
-    <div class="col-6" v-for="table in tables" :key="table.id">
+  <div class="row justify-content-center">
+    <div class="col-4" v-for="table in tables" :key="table.id">
       <TableCard :name="table.name" :id="table.id" :ports="table.ports" />
     </div>
   </div>

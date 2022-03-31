@@ -1,21 +1,22 @@
 <template>
-  <div class="card mb-3">
-    <img
-      class="card-img-top"
-      style="width: 60%"
-      :src="getImagePath"
-      :alt="name"
-    />
-    <div class="card-body; container-fluid">
-      <h2 class="card-title">{{ name }}</h2>
-      <p class="card-text">
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
-      </p>
-      <p class="card-text">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </p>
-    </div>
+  <div>
+    <b-card
+      :title="name"
+      :img-src="getImagePath"
+      :img-alt="name"
+      img-top
+      style="max-width: 50rem"
+      class="mb-2 mx-auto"
+    >
+      <b-card-text>
+        Some quick example text to build on the card title and make up the bulk
+        of the card's content.
+      </b-card-text>
+
+      <router-link :to="{ path: '/table/' + id }">
+        <b-button href="#" variant="primary">See Details ...</b-button>
+      </router-link>
+    </b-card>
   </div>
 </template>
 
