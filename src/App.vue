@@ -1,14 +1,23 @@
 <template>
+  <Intro/>
+  <ul>
+    <li> Kojak </li>
+    <li> Kajak </li>
+    <li> Annorak </li>
+    <li> Ananas </li>
+  </ul>
   <Map/>
 </template>
 
 <script>
 import Map from "./components/OverviewMap.vue"
+import Intro from "./components/OverviewIntro.vue"
 
 export default {
   name: "App",
   components: {
-    Map
+    Map,
+    Intro
   }
 }
 </script>
