@@ -1,11 +1,4 @@
 <template>
-  <Intro />
-  <ul>
-    <li>Kojak</li>
-    <li>Kajak</li>
-    <li>Annorak</li>
-    <li>Ananas</li>
-  </ul>
   <router-view />
 </template>
 
