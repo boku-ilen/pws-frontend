@@ -1,15 +1,23 @@
 <template>
+  <h1>Working Spaces</h1>
+  <div class="row">
+    <div class="col-6" v-for="table in tables" :key="table.id">
+      <TableCard :name="table.name" :id="table.id" :ports="table.ports" />
+    </div>
+  </div>
   <h1>Map</h1>
   <Map :tables="tables" />
 </template>
 
 <script>
 import Map from "./components/OverviewMap.vue";
+import TableCard from "./components/TableCard.vue";
 
 export default {
   name: "StartPage",
   components: {
     Map,
+    TableCard,
   },
 
   data() {
