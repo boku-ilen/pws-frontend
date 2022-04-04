@@ -7,12 +7,13 @@
       <l-feature-group v-for="(table, index) in tables" :key="index">
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">
           <l-icon>
-            <router-link :to="{ path: '/table/'+ table.id}">
-              <map-icon
+            <router-link :to="{ path: '/table/' + table.id }">
+              <icon
                 :name="table.name"
-                :latLon="[table.location_lat, table.location_lon]"
                 :ports="table.ports"
                 :id="table.id"
+                :isMapIcon="true"
+                transform="translate(-24 -55)"
               />
             </router-link>
           </l-icon>
@@ -31,7 +32,7 @@ import {
   LFeatureGroup,
 } from "@vue-leaflet/vue-leaflet";
 import "leaflet/dist/leaflet.css";
-import MapIcon from "./MapIcon.vue";
+import Icon from "./OverviewIcon.vue";
 
 export default {
   components: {
@@ -40,7 +41,7 @@ export default {
     LMarker,
     LFeatureGroup,
     LIcon,
-    MapIcon,
+    Icon,
   },
 
   props: {
