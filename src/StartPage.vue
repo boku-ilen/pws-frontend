@@ -1,14 +1,16 @@
 <template>
   <h1>Park Working Spaces</h1>
   <Intro />
+  <h2>Map</h2>
+  <div class="row justify-content-center">
+    <Map :tables="tables" />
+  </div>
   <h2>Working Spaces</h2>
   <div class="row justify-content-center">
     <div class="col-4" v-for="table in tables" :key="table.id">
       <TableCard :name="table.name" :id="table.id" :ports="table.ports" />
     </div>
   </div>
-  <h2>Map</h2>
-  <Map :tables="tables" />
 </template>
 
 <script>
@@ -34,6 +36,7 @@ export default {
     let tables_req = await fetch(`/tables/all`);
     tables_req.json().then((tables) => {
       this.tables = tables;
+      console.log(tables);
     });
   },
 };
