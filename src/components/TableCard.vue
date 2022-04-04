@@ -13,6 +13,8 @@
         of the card's content.
       </b-card-text>
 
+      <icon v-if="mounted" :name="name" :ports="ports" :id="id" />
+
       <router-link :to="{ path: '/table/' + id }">
         <b-button href="#" variant="primary">See Details ...</b-button>
       </router-link>
@@ -21,17 +23,33 @@
 </template>
 
 <script>
+import Icon from "./OverviewIcon.vue";
+
 export default {
+  components: {
+    Icon,
+  },
+
   props: {
     name: String,
     ports: Array,
     id: Number,
   },
 
+  data() {
+    return {
+      mounted: false,
+    };
+  },
+
   computed: {
     getImagePath() {
       return require(`../assets/location_${this.id}.jpg`);
     },
+  },
+
+  mounted() {
+    this.mounted = true;
   },
 };
 </script>
