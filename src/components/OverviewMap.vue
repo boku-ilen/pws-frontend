@@ -13,6 +13,8 @@
                 :ports="table.ports"
                 :id="table.id"
                 :isMapIcon="true"
+                :lat="table.location_lat"
+                :lon="table.location_lon"
                 transform="translate(-24 -55)"
               />
             </router-link>
