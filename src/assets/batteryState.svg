@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 26.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Ebene_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 24.999999 25"
+   xml:space="preserve"
+   sodipodi:docname="batteryState.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   width="25"
+   height="25"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs11" /><sodipodi:namedview
+   id="namedview9"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   showgrid="false"
+   inkscape:zoom="12.983333"
+   inkscape:cx="13.209243"
+   inkscape:cy="14.133504"
+   inkscape:window-width="2560"
+   inkscape:window-height="1377"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Ebene_1" />
+<style
+   type="text/css"
+   id="style2">
+	.st0{fill:none;stroke:#162B3A;stroke-width:1.0329;stroke-miterlimit:10;}
+	.st1{fill:#172B3A;}
+</style>
+<path
+   class="st0"
+   d="m 24.525197,12.499999 c 0,6.637763 -5.387435,12.025198 -12.025198,12.025198 -6.6469558,0 -12.02519677,-5.387435 -12.02519677,-12.025198 0,-6.6469558 5.38743597,-12.02519677 12.02519677,-12.02519677 6.637763,0 12.025198,5.37824097 12.025198,12.02519677 z"
+   id="path4" />
+<path
+   class="st1"
+   d="m 13.842261,4.5015882 v -0.900971 h -2.500652 v 0.891777 H 8.4180512 V 20.994864 H 16.618722 V 4.5015882 Z m 1.820328,4.863402 H 9.4385392 v -3.824528 h 6.2240498 z"
+   id="path6"
+   style="stroke-width:0.919357" />
+</svg>

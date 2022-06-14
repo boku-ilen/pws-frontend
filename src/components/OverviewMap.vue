@@ -13,7 +13,7 @@
                 :ports="table.ports"
                 :id="table.id"
                 :isMapIcon="true"
-                transform="translate(-24 -55)"
+                transform="translate(-3 -249)"
               />
             </router-link>
           </l-icon>

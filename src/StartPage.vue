@@ -36,7 +36,6 @@ export default {
     let tables_req = await fetch(`/tables/all`);
     tables_req.json().then((tables) => {
       this.tables = tables;
-      console.log(tables);
     });
   },
 };
