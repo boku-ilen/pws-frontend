@@ -14,6 +14,8 @@
                 :id="table.id"
                 :isMapIcon="true"
                 transform="translate(-3 -249)"
+                :lat="table.location_lat"
+                :lon="table.location_lon"
               />
             </router-link>
           </l-icon>

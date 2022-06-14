@@ -13,7 +13,14 @@
         of the card's content.
       </b-card-text>
 
-      <icon v-if="mounted" :name="name" :ports="ports" :id="id" />
+      <icon
+        v-if="mounted"
+        :name="name"
+        :ports="ports"
+        :id="id"
+        :lat="lat"
+        :lon="lon"
+      />
 
       <router-link :to="{ path: '/table/' + id }">
         <b-button href="#" variant="primary">See Details ...</b-button>
@@ -34,6 +41,8 @@ export default {
     name: String,
     ports: Array,
     id: Number,
+    lat: Number,
+    lon: Number,
   },
 
   data() {
