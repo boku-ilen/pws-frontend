@@ -1,6 +1,6 @@
 <template>
   <div class="container" style="height: 60vh; width: 100%">
-    <l-map ref="map" :max-zoom="maxZoom" :bounds="getBounds">
+    <l-map ref="map" :max-zoom="maxZoom" :bounds="boundsVienna">
       <l-tile-layer
         url="http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
       ></l-tile-layer>
@@ -13,7 +13,7 @@
                 :ports="table.ports"
                 :id="table.id"
                 :isMapIcon="true"
-                transform="translate(-3 -249)"
+                :leftAligned="table.id==1"
                 :lat="table.location_lat"
                 :lon="table.location_lon"
               />
@@ -21,6 +21,7 @@
           </l-icon>
         </l-marker>
       </l-feature-group>
+      <l-geo-json :options-style="styleFunction" :geojson="require(`../assets/districtsOutline.geojson`)"></l-geo-json>
     </l-map>
   </div>
 </template>
@@ -32,6 +33,7 @@ import {
   LMarker,
   LIcon,
   LFeatureGroup,
+  LGeoJson
 } from "@vue-leaflet/vue-leaflet";
 import "leaflet/dist/leaflet.css";
 import Icon from "./OverviewIcon.vue";
@@ -44,6 +46,7 @@ export default {
     LFeatureGroup,
     LIcon,
     Icon,
+    LGeoJson
   },
 
   props: {
@@ -54,13 +57,14 @@ export default {
     return {
       zoom: 11,
       maxZoom: 19,
+      boundsVienna: [[48.1179032575946763, 16.1818304928183423], [48.3226665679489997, 16.5775142432875313]]
     };
   },
 
   async mounted() {},
 
   computed: {
-    getBounds() {
+    getBoundsMarker() {
       let min = [
         Math.min(...this.tables.map((table) => table.location_lon)),
         Math.min(...this.tables.map((table) => table.location_lat)),
@@ -71,11 +75,23 @@ export default {
       ];
 
       // Make the bounds a bit bigger
-      min.map((x) => (x -= x * 0.1));
-      max.map((x) => (x += x * 0.1));
+      min.map((x) => (x -= x * 0.3));
+      max.map((x) => (x *= 1.3));
 
-      return [min, max];
+      //return [min, max];
+      return [[48.1179032575946763, 16.1818304928183423], [48.3226665679489997, 16.5775142432875313]];
     },
+
+    styleFunction() {
+      return () => {
+        return {
+          weight: 2,
+          color: "#ECEFF1",
+          opacity: 1,
+          fillOpacity: 1
+        };
+      };
+    }
   },
 
   methods: {},

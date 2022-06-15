@@ -13,13 +13,13 @@
         of the card's content.
       </b-card-text>
 
-      <icon
+      <table-short-description
         v-if="mounted"
-        :name="name"
+        batteryCharge=23.8
         :ports="ports"
         :id="id"
-        :lat="lat"
-        :lon="lon"
+        :leftAligned="false"
+        weatherState="SUNNY"
       />
 
       <router-link :to="{ path: '/table/' + id }">
@@ -30,19 +30,17 @@
 </template>
 
 <script>
-import Icon from "./OverviewIcon.vue";
+import TableShortDescription from './TableShortDescription.vue';
 
 export default {
   components: {
-    Icon,
+    TableShortDescription,
   },
 
   props: {
-    name: String,
-    ports: Array,
+    batteryCharge: Number,
     id: Number,
-    lat: Number,
-    lon: Number,
+    ports: Array,
   },
 
   data() {

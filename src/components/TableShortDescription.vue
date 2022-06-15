@@ -1,0 +1,69 @@
+<template>
+    <svg widht=500 height=500>
+        <g>
+            <image x="19" y="10" width="10" height="10" href="../assets/batteryState.svg"/>
+            <text x="31" y="14.5" class="svgText">{{ this.batteryCharge }}%</text>
+            <text v-if="is_charging" x="31" y="18.5" class="svgText" >lädt</text>
+            <text v-if="!is_charging" x="31" y="18.5" class="svgText">lädt nicht</text>
+
+            <image x="19" y="23" width="10" height="10" :href="require(`../assets/${ getWeatherIcon }`)"/>
+            <text x="31" y="29.5" class="svgText">{{this.weatherStateNames[this.weatherState]}}</text>
+
+            <image x="19" y="35.5" width="10" height="10" href="../assets/usbPort.svg"/>
+            <text x="31" y="42" class="svgText">{{ this.getEmptySlots }}x frei</text>
+            
+            <text v-if="leftAligned" class="svgMarkerId" x="50" y="60">{{ this.id }}</text>
+            <text v-if="!leftAligned" class="svgMarkerId" x="10" y="60">{{ this.id }}</text>
+        </g>
+    </svg>
+</template>
+
+<script>
+export default {
+    props: {
+        batteryCharge: Number,
+        pvCharge: Number,
+        ports: Array,
+        id: Number,
+        leftAligned: Boolean,
+        weatherState: String
+    },
+
+    data() {
+        return {
+            weatherStatePaths: {
+                SUNNY: "sun.svg",
+                OVERCAST: "overcast.svg",
+                RAINY: "sun.svg",
+            },
+            weatherStateNames: {
+                SUNNY: "sonnig",
+                OVERCAST: "bewölkt",
+                RAINY: "rainy",
+            }
+        }
+    },
+
+    computed: {
+        isCharging() {
+            // FIXME: change this according to a realistic number
+            return this.pvCharge > 5;
+        },
+
+        getWeatherIcon() {
+            let weatherIconPath = this.weatherStatePaths[this.weatherState];
+            return weatherIconPath;
+        },
+
+        getEmptySlots() {
+            if (this.portUsage === undefined) return 0;
+
+            return this.portUsage.reduce((x, y) => x + y);
+        },
+    }
+}
+</script>
+
+<style>
+
+</style>

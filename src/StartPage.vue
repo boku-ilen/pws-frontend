@@ -9,11 +9,8 @@
   <div class="row justify-content-center">
     <div class="col-4" v-for="table in tables" :key="table.id">
       <TableCard
-        :name="table.name"
         :id="table.id"
         :ports="table.ports"
-        :lat="table.location_lat"
-        :lon="table.location_lon"
       />
     </div>
   </div>
