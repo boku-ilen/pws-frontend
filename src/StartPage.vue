@@ -11,6 +11,7 @@
       <TableCard
         :id="table.id"
         :ports="table.ports"
+        :name="table.name"
       />
     </div>
   </div>
@@ -39,6 +40,7 @@ export default {
     let tables_req = await fetch(`/tables/all`);
     tables_req.json().then((tables) => {
       this.tables = tables;
+      console.log(tables)
     });
   },
 };

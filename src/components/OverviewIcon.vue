@@ -6,12 +6,19 @@
     :viewBox="getViewBox"
     :transform="getTransform"
   >
-    <svg v-if="isMapIcon" :transform="getMarkerTransform">
-        <image href="../assets/marker.svg" />
-    </svg>
+    <router-link :to="{ path: '/table/' + this.id }">
+      <svg v-if="isMapIcon" :transform="getMarkerTransform">
+          <image href="../assets/marker.svg" />
+      </svg>
+    </router-link>
+
     <g v-if="loaded">
+      <text v-if="leftAligned" class="svgMarkerId" x="50" y="60">{{ this.id }}</text>
+      <text v-if="!leftAligned" class="svgMarkerId" x="10" y="60">{{ this.id }}</text>
       <table-short-description 
-        :batteryCharge="batteryCharge" 
+        :batteryCharge="batteryCharge"
+        :portUsage="portUsage"
+        :weatherState="weatherState"
         :emptySlots="getEmptySlots"
         :leftAligned="leftAligned" 
         :id="id"/>
@@ -57,34 +64,37 @@ export default {
   async mounted() {
     let table_variable = await fetch(`/tables/latest/${this.id}`);
     table_variable.json().then(async (table_variable) => {
-      this.portUsage = table_variable.port_usage;
-      this.batteryCharge = table_variable.battery_charge;
+      this.portUsage = table_variable.port_usage;      this.batteryCharge = table_variable.battery_charge;
       this.pvCharge = table_variable.energy_production;
 
-      /*
-      // Weather
-      let apiKey = "db1a2f091413e833154a6de21adb3076";
-      let openweathermap_onecall = await fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lon}&lon=${this.lat}&exclude=hourly,daily&appid=${apiKey}`
-      );
-      openweathermap_onecall = await openweathermap_onecall.json();
+      // eslint-disable-next-line
+      if (false) {
+        // Weather
+        let apiKey = "db1a2f091413e833154a6de21adb3076";
+        let openweathermap_onecall = await fetch(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lon}&lon=${this.lat}&exclude=hourly,daily&appid=${apiKey}`
+        );
+        openweathermap_onecall = await openweathermap_onecall.json();
 
-      let weatherID = openweathermap_onecall["current"]["weather"][0]["id"];
-      let roughWeatherState = weatherID.toString()[0];
+        let weatherID = openweathermap_onecall["current"]["weather"][0]["id"];
+        let roughWeatherState = weatherID.toString()[0];
 
-      // https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
-      if (roughWeatherState < 7) {
-        this.weatherState = "RAINY";
-      } else if (roughWeatherState == 7) {
-        this.weatherState = "OVERCAST";
-      } else {
-        if (weatherID > 800) {
+        // https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+        if (roughWeatherState < 7) {
+          this.weatherState = "RAINY";
+        } else if (roughWeatherState == 7) {
           this.weatherState = "OVERCAST";
         } else {
-          this.weatherState = "SUNNY";
+          if (weatherID > 800) {
+            this.weatherState = "OVERCAST";
+          } else {
+            this.weatherState = "SUNNY";
+          }
         }
+      } else {
+        this.weatherState = "SUNNY";
       }
-      */
+        
       this.loaded = true;
     });
   },
