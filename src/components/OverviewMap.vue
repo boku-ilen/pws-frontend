@@ -4,6 +4,7 @@
       <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)" :options-style="styleFunction"></l-geo-json>
       <l-tile-layer
         url="https://stamen-tiles.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}.png"
+        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
       ></l-tile-layer>
       <l-feature-group v-for="(table, index) in tables" :key="index">
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">
@@ -31,7 +32,7 @@ import {
   LMarker,
   LIcon,
   LFeatureGroup,
-  LGeoJson
+  LGeoJson,
 } from "@vue-leaflet/vue-leaflet";
 import "leaflet/dist/leaflet.css";
 import Icon from "./OverviewIcon.vue";
