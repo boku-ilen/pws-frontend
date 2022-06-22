@@ -1,40 +1,16 @@
 <template>
   <div v-if="loaded">
-    <h1>ParkWorkingSpace {{ table.name }}</h1>
-    <div>
-      Derzeit
-      <span v-if="number_of_free_usb == number_of_total_usb">sind alle</span>
-      <span v-else-if="number_of_free_usb > 1"
-        >sind {{ number_of_free_usb }} von</span
-      >
-      <span v-else-if="number_of_free_usb == 1">ist einer von</span>
-      <span v-else>ist keiner von</span> {{ number_of_total_usb }} USB-Steckern
-      frei. Von den {{ number_of_total_qi }} Qi-Ladestationen
-      <span v-if="number_of_free_qi == number_of_total_qi">sind alle</span>
-      <span v-else-if="number_of_free_qi > 1"
-        >sind {{ number_of_free_qi }}</span
-      >
-      <span v-else-if="number_of_free_qi == 1">ist eine</span>
-      <span v-else>ist keine</span> frei.
-    </div>
-    <!--
-    <ul>
-      <li v-for="(type, index) in table.ports" :key="index">
-        {{ type }}:
-        <span v-if="latest.port_usage[index] > 0.1">Besetzt</span>
-        <span v-else>Frei</span>
-      </li>
-    </ul>
-    -->
-    <div>
-      Der Akku ist zu {{ latest.battery_charge }}% geladen und lädt gerade
-      <span v-if="latest.energy_production < 5">nicht</span> auf.
-    </div>
+    <h1>Arbeitsplatz {{ table.name }}</h1>
+    <table-detail-description />
+    <table-detail-figure />
   </div>
 </template>
 
 <script>
+import TableDetailDescription from './components/TableDetailDescription.vue';
+import TableDetailFigure from './components/TableDetailFigure.vue';
 export default {
+  components: { TableDetailDescription, TableDetailFigure },
   data: function () {
     return {
       loaded: false,
