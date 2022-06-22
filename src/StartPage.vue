@@ -5,7 +5,7 @@
         <Map :tables="tables" />
       </div>
       <div class="col-md-4">
-        <div v-for="table in tables" :key="table.id">
+        <div class="container-fluid d-flex" v-for="table in tables" :key="table.id">
           <TableCard
             :id="table.id"
             :ports="table.ports"
@@ -49,6 +49,7 @@ export default {
 <style>
 .container-fluid {
   padding-left: 0% !important;
+  min-height: 50%;
 }
 
 @media (min-width: 768px) {

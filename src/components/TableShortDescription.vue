@@ -64,5 +64,14 @@ export default {
 </script>
 
 <style>
+.svgText {
+  fill: red;
+  font-size: 4px;
+  font-family: "DMSans";
+}
 
+.svgMarkerId {
+  fill: white;
+  font-family: "DMSans";
+}
 </style>

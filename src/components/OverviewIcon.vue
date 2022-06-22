@@ -118,12 +118,4 @@ export default {
 </script>
 
 <style>
-.svgText {
-  fill: red;
-  font-size: 4px;
-}
-
-.svgMarkerId {
-  fill: white;
-}
 </style>

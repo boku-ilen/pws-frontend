@@ -1,11 +1,11 @@
 <template>
   <!-- FIXME: handle the district in a more generic way -->
   <b-card
-    :title="`${this.id}. ${name}, Wien ${getDistrict}`"
+    :title="`${this.id}. ${name}, Wien ${getDistrict}.`"
     :img-src="getImagePath"
     :img-alt="name"
     img-top
-    class="mb-2"
+    class="mb-2 mt-4 h-100"
   >
     <b-card-text>
       Some quick example text to build on the card title and make up the bulk
