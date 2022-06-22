@@ -1,40 +1,38 @@
 <template>
-  <div>
-    <b-card
-      :title="name"
-      :img-src="getImagePath"
-      :img-alt="name"
-      img-top
-      style="max-width: 60rem"
-      class="mb-2 mx-auto"
+  <b-card
+    :title="name"
+    :img-src="getImagePath"
+    :img-alt="name"
+    img-top
+    style="max-width: 60rem"
+    class="mb-2 mx-auto"
+  >
+    <b-card-text>
+      Some quick example text to build on the card title and make up the bulk
+      of the card's content.
+    </b-card-text>
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      :width="width"
+      :height="height"
+      :viewBox="getViewBox"
+      :transform="getTransform"
     >
-      <b-card-text>
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </b-card-text>
+      <table-short-description
+        v-if="mounted"
+        batteryCharge=23.8
+        :portUsage="portUsage"
+        :id="id"
+        :leftAligned="false"
+        weatherState="SUNNY"
+      />
+    </svg>
 
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        :width="width"
-        :height="height"
-        :viewBox="getViewBox"
-        :transform="getTransform"
-      >
-        <table-short-description
-          v-if="mounted"
-          batteryCharge=23.8
-          :portUsage="portUsage"
-          :id="id"
-          :leftAligned="false"
-          weatherState="SUNNY"
-        />
-      </svg>
-
-      <router-link :to="{ path: '/table/' + id }">
-        <b-button href="#" variant="primary">See Details ...</b-button>
-      </router-link>
-    </b-card>
-  </div>
+    <router-link :to="{ path: '/table/' + id }">
+      <b-button href="#" variant="primary">See Details ...</b-button>
+    </router-link>
+  </b-card>
 </template>
 
 <script>

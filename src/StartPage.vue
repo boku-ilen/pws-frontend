@@ -1,18 +1,18 @@
 <template>
   <h1>Park Working Spaces</h1>
   <Intro />
-  <h2>Map</h2>
-  <div class="row justify-content-center">
-    <Map :tables="tables" />
-  </div>
-  <h2>Working Spaces</h2>
-  <div class="row justify-content-center">
-    <div class="col-4" v-for="table in tables" :key="table.id">
-      <TableCard
-        :id="table.id"
-        :ports="table.ports"
-        :name="table.name"
-      />
+  <div class="row">
+    <div class="col-sm-6">
+      <Map :tables="tables" />
+    </div>
+    <div class="col-sm-4">
+      <div v-for="table in tables" :key="table.id">
+        <TableCard
+          :id="table.id"
+          :ports="table.ports"
+          :name="table.name"
+        />
+      </div>
     </div>
   </div>
 </template>

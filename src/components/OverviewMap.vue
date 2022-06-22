@@ -3,7 +3,7 @@
     <l-map ref="map" :max-zoom="maxZoom" :bounds="getBoundsVienna">
       <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)" :options-style="styleFunction"></l-geo-json>
       <l-tile-layer
-        url="http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+        url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
       ></l-tile-layer>
       <l-feature-group v-for="(table, index) in tables" :key="index">
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">
@@ -44,7 +44,7 @@ export default {
     LFeatureGroup,
     LIcon,
     Icon,
-    LGeoJson
+    LGeoJson,
   },
 
   props: {
@@ -82,6 +82,7 @@ export default {
       // For whatever reason the this.tables call is necessary 
       // Further investigatio nrequired
       this.tables.keys
+      //return [[48.13, 16.4], [48.34, 16.8]];
       return [[48.13, 16.1818304928183423], [48.34, 16.5775142432875313]];
     }, 
 
@@ -105,5 +106,12 @@ export default {
 path.leaflet-interactive {
   stroke: #000000 !important;
   stroke-width: 2px;
+}
+
+.map-card {
+  position: absolute !important;
+  top: 20%;
+  z-index: 9999;
+  left: 30%;
 }
 </style>
