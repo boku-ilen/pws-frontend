@@ -45,9 +45,19 @@
                 <tspan x="0" text-anchor="middle" dy="1.2em">frei</tspan>
             </text>
 
+            <defs>
+                <filter id="glow">
+                <feDropShadow dx="0" dy="0" stdDeviation="1.5"
+                    flood-color="#83ad59"/>
+                </filter>
+            </defs>
             <path class="charging-line"
-             d="m95.25 385.856.102-155.16 56.556-15.06 119.764-3.268 7.46 5.6 4.839 31.406"
-              transform="translate(66 280) matrix(1.4 0 0 -1.33333 -126.5 514.474)"/>            
+                    d="m95.25 385.856.102-155.16 56.556-15.06 119.764-3.268 7.46 5.6 4.839 31.406"
+                    transform="translate(66 280) matrix(1.4 0 0 -1.33333 -126.5 514.474)"/>   
+            
+            <path style="filter: url(#glow);" fill-rule="evenodd" 
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                transform="translate(165 170) rotate(135) scale(3 3)"/>
         </svg>
     </div>
 </template>
@@ -69,9 +79,9 @@ export default {
 
 .charging-line {
     fill: none;
-    stroke: #3bc8ff;
+    stroke: #83ad59;
     stroke-width: 1.7px;
-
+    filter: url(#glow);
     stroke-dasharray: 10; 
     animation: move 3s linear infinite;
 }
@@ -80,10 +90,6 @@ export default {
     to {
         stroke-dashoffset: -100;
     }
-}
-
-.svg-container {
-    
 }
 
 @media (min-width: 768px) {
