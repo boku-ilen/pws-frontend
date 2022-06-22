@@ -1,11 +1,11 @@
 <template>
+  <!-- FIXME: handle the district in a more generic way -->
   <b-card
-    :title="name"
+    :title="`${this.id}. ${name}, Wien ${getDistrict}`"
     :img-src="getImagePath"
     :img-alt="name"
     img-top
-    style="max-width: 60rem"
-    class="mb-2 mx-auto"
+    class="mb-2"
   >
     <b-card-text>
       Some quick example text to build on the card title and make up the bulk
@@ -71,7 +71,13 @@ export default {
     },
 
     getTransform() {
-      return `translate(-150 0)`
+      return `translate(-50 0)`
+    },
+
+    getDistrict() {
+      console.log(this.id);
+      if(this.id == 1) return 16
+      else return 8
     }
   },
 
@@ -96,5 +102,10 @@ export default {
 
 .card {
   border-color: #83ad59 !important;
+  border-radius: 0% !important;
+}
+
+.card-img-top {
+  border-radius: 0% !important;
 }
 </style>

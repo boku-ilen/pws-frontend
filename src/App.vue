@@ -14,12 +14,16 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "DMSans";
+  src: URL("./assets/DMSans-Regular.ttf") format("truetype");
+}
+
 #app {
-  font-family: DMSans, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "DMSans";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

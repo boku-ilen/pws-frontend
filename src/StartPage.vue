@@ -1,17 +1,17 @@
 <template>
-  <h1>Park Working Spaces</h1>
-  <Intro />
-  <div class="row">
-    <div class="col-sm-6">
-      <Map :tables="tables" />
-    </div>
-    <div class="col-sm-4">
-      <div v-for="table in tables" :key="table.id">
-        <TableCard
-          :id="table.id"
-          :ports="table.ports"
-          :name="table.name"
-        />
+  <div class="container-fluid master-container" style="max-height: 100vh">
+    <div class="row">
+      <div class="col-md-8">
+        <Map :tables="tables" />
+      </div>
+      <div class="col-md-4">
+        <div v-for="table in tables" :key="table.id">
+          <TableCard
+            :id="table.id"
+            :ports="table.ports"
+            :name="table.name"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -47,4 +47,19 @@ export default {
 </script>
 
 <style>
+.container-fluid {
+  padding-left: 0% !important;
+}
+
+@media (min-width: 768px) {
+  .master-container {
+    padding-right: 1% !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .container-fluid {
+    padding-right: 0% !important;
+  }
+}
 </style>

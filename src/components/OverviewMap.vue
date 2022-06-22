@@ -1,9 +1,9 @@
 <template>
-  <div class="container" style="height: 80vh; width: 100%">
+  <div class="container-fluid mb-2 w-100" style="min-height: 100vh; height: 99%; width: 100%">
     <l-map ref="map" :max-zoom="maxZoom" :bounds="getBoundsVienna">
       <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)" :options-style="styleFunction"></l-geo-json>
       <l-tile-layer
-        url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+        url="https://stamen-tiles.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}.png"
       ></l-tile-layer>
       <l-feature-group v-for="(table, index) in tables" :key="index">
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">

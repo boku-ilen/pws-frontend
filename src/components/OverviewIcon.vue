@@ -121,11 +121,9 @@ export default {
 .svgText {
   fill: red;
   font-size: 4px;
-  font-family: DMSans;
 }
 
 .svgMarkerId {
   fill: white;
-  font-family: DMSans;
 }
 </style>
