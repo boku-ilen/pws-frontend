@@ -1,13 +1,13 @@
 <template>
   <div class="container-fluid mb-2 w-100" style="min-height: 100vh; height: 99%; width: 100%">
-    <l-map ref="map" :max-zoom="maxZoom" :bounds="getBoundsVienna">
+    <l-map ref="map" :max-zoom="maxZoom" :options="{ zoomSnap: 0.1 }" :bounds="bounds">
       <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)" :options-style="styleFunction"></l-geo-json>
       <l-tile-layer
-        url="https://stamen-tiles.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}.png"
-        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+        :url="url"
+        :attribution="attribution"
       ></l-tile-layer>
       <l-feature-group v-for="(table, index) in tables" :key="index">
-        <l-marker :lat-lng="[table.location_lon, table.location_lat]">
+        <l-marker :lat-lng="[table.location_lon, table.location_lat]" @ready="onReady">
           <l-icon>
             <icon
               :name="table.name"
@@ -55,11 +55,23 @@ export default {
   data() {
     return {
       zoom: 11,
-      maxZoom: 19,
+      maxZoom: 17,
+      url: `https://stamen-tiles.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}.png`,
+      attribution: `Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.`,
+      bounds: [],
+      center: [47.413220, -1.219482]
     };
   },
 
-  async mounted() {},
+  async mounted() {
+   
+  },
+
+  methods: {
+    onReady() {
+      this.bounds = [[48.13, 16.1818304928183423], [48.34, 16.5775142432875313]]
+    }
+  },
 
   computed: {
     getBoundsMarker() {
@@ -77,29 +89,8 @@ export default {
       max.map((x) => (x *= 1.3));
 
       return [min, max];
-    },
-
-    getBoundsVienna() {
-      // For whatever reason the this.tables call is necessary 
-      // Further investigatio nrequired
-      this.tables.keys
-      //return [[48.13, 16.4], [48.34, 16.8]];
-      return [[48.13, 16.1818304928183423], [48.34, 16.5775142432875313]];
-    }, 
-
-    styleFunction(f) {
-      f
-      return {
-        weight: 2,
-        color: "#ECEFF1",
-        opacity: 0.5,
-      };
-    },
-  },
-
-  methods: {
-
-  },
+    }
+  }
 };
 </script>
 
