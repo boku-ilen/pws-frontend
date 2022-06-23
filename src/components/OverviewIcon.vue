@@ -6,6 +6,7 @@
     :viewBox="getViewBox"
     :transform="getTransform"
   >
+    <rect x=-500 y=-500 width=700 height=700 />
     <router-link :to="{ path: '/table/' + this.id }">
       <svg v-if="isMapIcon" :transform="getMarkerTransform">
           <image href="../assets/marker.svg" />
@@ -61,6 +62,18 @@ export default {
     };
   },
 
+  methods: {
+    resizeIcons() {
+      if (window.innerWidth > "1000") {
+        this.width = "230";
+        this.height = "250";
+      } else {
+        this.width = "130";
+        this.height = "150";
+      }
+    }
+  },
+
   async mounted() {
     let table_variable = await fetch(`/tables/latest/${this.id}`);
     table_variable.json().then(async (table_variable) => {
@@ -94,7 +107,9 @@ export default {
       } else {
         this.weatherState = "SUNNY";
       }
-        
+      
+      this.resizeIcons()
+
       this.loaded = true;
     });
   },
@@ -114,6 +129,16 @@ export default {
       return `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`
     }
   },
+
+  created() {
+    window.addEventListener("resize", this.resizeIcons);
+  },
+
+  unmounted() {
+    window.removeEventListener("resize", this.resizeIcons);
+  },
+
+  
 };
 </script>
 
