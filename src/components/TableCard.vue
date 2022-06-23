@@ -7,11 +7,6 @@
     img-top
     class="mb-2 mt-4 h-100"
   >
-    <b-card-text>
-      Some quick example text to build on the card title and make up the bulk
-      of the card's content.
-    </b-card-text>
-
     <svg
       xmlns="http://www.w3.org/2000/svg"
       :width="width"
@@ -30,7 +25,7 @@
     </svg>
 
     <router-link :to="{ path: '/table/' + id }">
-      <b-button href="#" variant="primary">See Details ...</b-button>
+      <b-button href="#" variant="primary">Weitere Infos ...</b-button>
     </router-link>
   </b-card>
 </template>
