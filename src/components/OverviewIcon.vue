@@ -6,7 +6,6 @@
     :viewBox="getViewBox"
     :transform="getTransform"
   >
-    <rect x=-500 y=-500 width=700 height=700 />
     <router-link :to="{ path: '/table/' + this.id }">
       <svg v-if="isMapIcon" :transform="getMarkerTransform">
           <image href="../assets/marker.svg" />
