@@ -16,7 +16,8 @@
     "json-loader": "^0.5.7",
     "mdb-ui-kit": "^3.11.0",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
