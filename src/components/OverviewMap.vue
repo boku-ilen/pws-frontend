@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mb-2 w-100" style="min-height: 100vh; height: 99%; width: 100%">
     <l-map ref="map" :max-zoom="maxZoom" :options="{ zoomSnap: 0.1 }" :bounds="bounds">
-      <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)" :options-style="styleFunction"></l-geo-json>
+      <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)"></l-geo-json>
       <l-tile-layer
         :url="url"
         :attribution="attribution"

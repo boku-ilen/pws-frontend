@@ -16,11 +16,11 @@
     >
       <table-short-description
         v-if="mounted"
-        batteryCharge=23.8
+        :batteryCharge="batteryCharge"
         :portUsage="portUsage"
         :id="id"
         :leftAligned="false"
-        weatherState="SUNNY"
+        :weatherState="weatherState"
       />
     </svg>
 
@@ -40,7 +40,6 @@ export default {
 
   props: {
     name: String,
-    batteryCharge: Number,
     id: Number,
     ports: Array,
   },
@@ -48,11 +47,13 @@ export default {
   data() {
     return {
       mounted: false,
-      portUsage: [0, 0, 1, 1, 1],
+      portUsage: [],
       width: "250",
       height: "180",
       viewBoxWidth: 65,
       viewBoxHeight: 62,
+      batteryCharge: Number,
+      weatherState: String,
     };
   },
 
@@ -70,14 +71,19 @@ export default {
     },
 
     getDistrict() {
-      console.log(this.id);
       if(this.id == 1) return 16
       else return 8
     }
   },
 
-  mounted() {
-    this.mounted = true;
+  async mounted() {
+    let table_snapshot = this.$store.getters.snapshots[this.id];
+    this.portUsage = table_snapshot.port_usage;      
+    this.batteryCharge = table_snapshot.battery_charge;
+    this.pvCharge = table_snapshot.energy_production;
+    this.weatherState = this.$store.getters.weatherData[this.id];
+
+    this.mounted = true
   },
 };
 </script>

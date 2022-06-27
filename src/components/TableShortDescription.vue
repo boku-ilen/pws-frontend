@@ -54,9 +54,7 @@ export default {
         },
 
         getEmptySlots() {
-            
             if (this.portUsage === undefined) return 0;
-            console.log(this.portUsage)
             return this.portUsage.length - this.portUsage.reduce((x, y) => x + y);
         },
     }
