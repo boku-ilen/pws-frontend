@@ -17,6 +17,7 @@
       <table-short-description
         v-if="mounted"
         :batteryCharge="batteryCharge"
+        :pvCharge="pvCharge"
         :portUsage="portUsage"
         :id="id"
         :leftAligned="false"
@@ -54,6 +55,7 @@ export default {
       viewBoxHeight: 62,
       batteryCharge: Number,
       weatherState: String,
+      pvCharge: Number
     };
   },
 

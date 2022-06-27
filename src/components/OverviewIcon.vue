@@ -16,6 +16,7 @@
       <text v-if="leftAligned" class="svgMarkerId" x="50" y="60">{{ this.id }}</text>
       <text v-if="!leftAligned" class="svgMarkerId" x="10" y="60">{{ this.id }}</text>
       <table-short-description 
+        :pvCharge="pvCharge"
         :batteryCharge="batteryCharge"
         :portUsage="portUsage"
         :weatherState="weatherState"
