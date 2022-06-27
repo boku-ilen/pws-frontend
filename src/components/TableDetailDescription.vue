@@ -9,7 +9,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40">
                     <image x="0" y="0" width="40" height="40" href="../assets/usbPort.svg"/>
                 </svg>
-                4 USB-Plugs / 1 besetzt
+                {{ usbPlugs }} USB-Plugs / {{ usbPlugs - usbPlugsFree }} besetzt
             </span>
         </div>
         <div class="row div-centered">
@@ -17,7 +17,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40">
                     <image x="0" y="0" width="40" height="40" href="../assets/qiPoint.svg"/>
                 </svg>
-                2 Qi-Ladepunkte / 1 besetzt
+                {{ qiPlugs }} Qi-Ladepunkte / {{ qiPlugsFree }} besetzt
             </span>
         </div>
         <div class="row div-centered">
@@ -42,7 +42,12 @@
 
 <script>
 export default {
-
+    props: {
+        usbPlugs: Number,
+        usbPlugsFree: Number,
+        qiPlugs: Number,
+        qiPlugsFree: Number,
+    }
 }
 </script>
 

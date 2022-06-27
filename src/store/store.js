@@ -1,11 +1,14 @@
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 const store = createStore({
   state: {
     tables: [],
+    tablesById: {},
     snapshots: {},
     weatherData: {}
   },
+
   mutations: {
     updateTables(state, tables) {
       state.tables = tables;
@@ -18,8 +21,11 @@ const store = createStore({
     }
   },
 
+  plugins: [createPersistedState()],
+
   getters: {
     tables: (state) => state.tables,
+    tablesById: (state) => state.tablesById,
     snapshots: (state) => state.snapshots,
     weatherData: (state) => state.weatherData
   },
@@ -28,6 +34,11 @@ const store = createStore({
     async loadTables({ state }) {
       let tables_req = await fetch(`/tables/all`);
       tables_req = await tables_req.json();
+      
+      for(let i = 0; i < tables_req.length; i++) {
+        state.tablesById[tables_req[i]["id"]] = tables_req[i];
+      }
+      
       state.tables = tables_req;
     },
     async loadSnapshots({ state }) {
