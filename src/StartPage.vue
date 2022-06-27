@@ -37,11 +37,11 @@ export default {
   },
 
   async mounted() {
-    let tables_req = await fetch(`/tables/all`);
-    tables_req.json().then((tables) => {
-      this.tables = tables;
-      console.log(tables)
-    });
+    await this.$store.dispatch("loadTables");
+    await this.$store.dispatch("loadSnapshots");
+    // FIXME: make this production ready
+    await this.$store.dispatch("mockWeatherData");
+    this.tables = this.$store.getters.tables;
   },
 };
 </script>
