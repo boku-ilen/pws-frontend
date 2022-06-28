@@ -60,6 +60,20 @@
           LED Licht
         </span>
       </div>
+      <div class="row div-centered">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40">
+            <image
+              x="0"
+              y="0"
+              width="40"
+              height="40"
+              href="../assets/locationMarker.svg"
+            />
+          </svg>
+            <a id="geo_uri" :href="`geo:${lat},${lon}?z=15`">Navigate to this table</a>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -71,6 +85,8 @@ export default {
     usbPlugsFree: Number,
     qiPlugs: Number,
     qiPlugsFree: Number,
+    lat: Number,
+    lon: Number
   },
 };
 </script>

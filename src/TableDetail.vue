@@ -6,6 +6,8 @@
       :qiPlugsFree="number_of_free_qi"
       :usbPlugs="number_of_total_usb"
       :usbPlugsFree="number_of_free_usb"
+      :lat="table['location_lat']"
+      :lon="table['location_lon']"
     />
     <table-detail-figure
       v-if="loaded"
