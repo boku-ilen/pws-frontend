@@ -1,13 +1,13 @@
 <template>
   <div class="container-fluid mb-2 w-100" style="min-height: 100vh; height: 99%; width: 100%">
-    <l-map ref="map" :max-zoom="maxZoom" :options="{ zoomSnap: 0.1 }" :bounds="bounds">
+    <l-map ref="map" :max-zoom="maxZoom" :options="{ zoomSnap: 0.1 }" :bounds="bounds" @ready="onReady">
       <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)"></l-geo-json>
       <l-tile-layer
         :url="url"
         :attribution="attribution"
       ></l-tile-layer>
       <l-feature-group v-for="(table, index) in tables" :key="index">
-        <l-marker :lat-lng="[table.location_lon, table.location_lat]" @ready="onReady">
+        <l-marker :lat-lng="[table.location_lon, table.location_lat]">
           <l-icon>
             <icon
               :name="table.name"
@@ -59,7 +59,6 @@ export default {
       url: `https://stamen-tiles.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}.png`,
       attribution: `Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.`,
       bounds: [],
-      center: [47.413220, -1.219482]
     };
   },
 
