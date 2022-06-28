@@ -6,8 +6,8 @@
       :qiPlugsFree="number_of_free_qi"
       :usbPlugs="number_of_total_usb"
       :usbPlugsFree="number_of_free_usb"
-     />
-    <table-detail-figure 
+    />
+    <table-detail-figure
       v-if="loaded"
       :qiPlugsFree="getFreePlugsByType('QI')"
       :usbPlugsFree="getFreePlugsByType('USB')"
@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import TableDetailDescription from './components/TableDetailDescription.vue';
-import TableDetailFigure from './components/TableDetailFigure.vue';
+import TableDetailDescription from "./components/TableDetailDescription.vue";
+import TableDetailFigure from "./components/TableDetailFigure.vue";
 export default {
   components: { TableDetailDescription, TableDetailFigure },
   data: function () {
@@ -37,7 +37,7 @@ export default {
       plugs: [],
       plugsFree: [],
       weatherState: String,
-      degrees: Number
+      degrees: Number,
     };
   },
 
@@ -46,12 +46,14 @@ export default {
     await this.$store.dispatch("loadSnapshots");
     // FIXME: make this production ready
     await this.$store.dispatch("loadWeatherData");
-    
+
     this.table = this.$store.getters.tablesById[this.table_type];
     this.latest = this.$store.getters.snapshots[this.table_type];
-    this.plugsFree = this.$store.getters.snapshots[this.table_type]["port_usage"];
+    this.plugsFree =
+      this.$store.getters.snapshots[this.table_type]["port_usage"];
     this.plugs = this.$store.getters.tablesById[this.table_type]["ports"];
-    this.weatherState = this.$store.getters.weatherData[this.table_type]["weatherState"];
+    this.weatherState =
+      this.$store.getters.weatherData[this.table_type]["weatherState"];
     this.degrees = this.$store.getters.weatherData[this.table_type]["temp"];
 
     // Count number of (free) ports
@@ -79,8 +81,8 @@ export default {
       let startingIndex = this.plugs.indexOf(type);
       let endingIndex = this.plugs.lastIndexOf(type);
       return this.plugsFree.slice(startingIndex, endingIndex + 1);
-    }
-  }
+    },
+  },
 };
 </script>
 

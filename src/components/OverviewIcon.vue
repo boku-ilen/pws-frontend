@@ -8,30 +8,35 @@
   >
     <router-link :to="{ path: '/table/' + this.id }">
       <svg v-if="isMapIcon" :transform="getMarkerTransform">
-          <image href="../assets/marker.svg" />
+        <image href="../assets/marker.svg" />
       </svg>
     </router-link>
 
     <g v-if="loaded">
-      <text v-if="leftAligned" class="svgMarkerId" x="50" y="60">{{ this.id }}</text>
-      <text v-if="!leftAligned" class="svgMarkerId" x="10" y="60">{{ this.id }}</text>
-      <table-short-description 
+      <text v-if="leftAligned" class="svgMarkerId" x="50" y="60">
+        {{ this.id }}
+      </text>
+      <text v-if="!leftAligned" class="svgMarkerId" x="10" y="60">
+        {{ this.id }}
+      </text>
+      <table-short-description
         :pvCharge="pvCharge"
         :batteryCharge="batteryCharge"
         :portUsage="portUsage"
         :weatherState="weatherState"
-        :leftAligned="leftAligned" 
-        :id="id"/>
+        :leftAligned="leftAligned"
+        :id="id"
+      />
     </g>
   </svg>
 </template>
 
 <script>
-import TableShortDescription from "./TableShortDescription.vue"
+import TableShortDescription from "./TableShortDescription.vue";
 
 export default {
   components: {
-    TableShortDescription
+    TableShortDescription,
   },
 
   props: {
@@ -52,7 +57,7 @@ export default {
       pvCharge: Number,
       portUsage: Array,
       weatherState: String,
-      
+
       viewBoxWidth: 65,
       viewBoxHeight: 72,
 
@@ -70,35 +75,36 @@ export default {
         this.width = "130";
         this.height = "150";
       }
-    }
+    },
   },
 
   async mounted() {
     let table_snapshot = this.$store.getters.snapshots[this.id];
-    this.portUsage = table_snapshot.port_usage;      
+    this.portUsage = table_snapshot.port_usage;
     this.batteryCharge = table_snapshot.battery_charge;
     this.pvCharge = table_snapshot.energy_production;
-    this.weatherState = this.$store.getters.weatherData[this.id]["weatherState"];
+    this.weatherState =
+      this.$store.getters.weatherData[this.id]["weatherState"];
 
-    this.resizeIcons()
+    this.resizeIcons();
 
     this.loaded = true;
   },
 
   computed: {
     getTransform() {
-      if(!this.leftAligned) return `translate(0 -${ this.height })`
-      else return `translate(-${ this.width } -${ this.height })`
+      if (!this.leftAligned) return `translate(0 -${this.height})`;
+      else return `translate(-${this.width} -${this.height})`;
     },
 
     getMarkerTransform() {
-      if(!this.leftAligned) return "translate(-1 0) scale(1 1)"
-      else return `translate(${ this.viewBoxWidth + 1} 0) scale(-1 1)`
+      if (!this.leftAligned) return "translate(-1 0) scale(1 1)";
+      else return `translate(${this.viewBoxWidth + 1} 0) scale(-1 1)`;
     },
 
     getViewBox() {
-      return `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`
-    }
+      return `0 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`;
+    },
   },
 
   created() {
@@ -108,8 +114,6 @@ export default {
   unmounted() {
     window.removeEventListener("resize", this.resizeIcons);
   },
-
-  
 };
 </script>
 

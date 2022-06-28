@@ -34,15 +34,15 @@ const store = createStore({
     async loadTables({ state }) {
       let tables_req = await fetch(`/tables/all`);
       tables_req = await tables_req.json();
-      
-      for(let i = 0; i < tables_req.length; i++) {
+
+      for (let i = 0; i < tables_req.length; i++) {
         state.tablesById[tables_req[i]["id"]] = tables_req[i];
       }
-      
+
       state.tables = tables_req;
     },
     async loadSnapshots({ state }) {
-      for(let i = 0; i < state.tables.length; i++) {
+      for (let i = 0; i < state.tables.length; i++) {
         let id = state.tables[i]["id"]
         let table_variable = await fetch(`/tables/latest/${id}`);
         table_variable = await table_variable.json();
@@ -50,7 +50,7 @@ const store = createStore({
       }
     },
     async loadWeatherData({ state }) {
-      for(let i = 0; i < state.tables.length; i++) {
+      for (let i = 0; i < state.tables.length; i++) {
         let id = state.tables[i]["id"];
         let lat = state.tables[i]["location_lat"];
         let lon = state.tables[i]["location_lon"];

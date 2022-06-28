@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import TableShortDescription from './TableShortDescription.vue';
+import TableShortDescription from "./TableShortDescription.vue";
 
 export default {
   components: {
@@ -55,7 +55,7 @@ export default {
       viewBoxHeight: 62,
       batteryCharge: Number,
       weatherState: String,
-      pvCharge: Number
+      pvCharge: Number,
     };
   },
 
@@ -65,27 +65,28 @@ export default {
     },
 
     getViewBox() {
-      return `10 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`
+      return `10 0 ${this.viewBoxWidth} ${this.viewBoxHeight}`;
     },
 
     getTransform() {
-      return `translate(-50 0)`
+      return `translate(-50 0)`;
     },
 
     getDistrict() {
-      if(this.id == 1) return 16
-      else return 8
-    }
+      if (this.id == 1) return 16;
+      else return 8;
+    },
   },
 
   async mounted() {
     let table_snapshot = this.$store.getters.snapshots[this.id];
-    this.portUsage = table_snapshot.port_usage;      
+    this.portUsage = table_snapshot.port_usage;
     this.batteryCharge = table_snapshot.battery_charge;
     this.pvCharge = table_snapshot.energy_production;
-    this.weatherState = this.$store.getters.weatherData[this.id]["weatherState"];
+    this.weatherState =
+      this.$store.getters.weatherData[this.id]["weatherState"];
 
-    this.mounted = true
+    this.mounted = true;
   },
 };
 </script>
@@ -97,7 +98,11 @@ export default {
   background-color: rgba(0, 0, 0, 0) !important;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
   color: #fff !important;
   background-color: #83ad59 !important;
   border-color: #fd1c1c !important;

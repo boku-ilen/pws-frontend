@@ -1,11 +1,20 @@
 <template>
-  <div class="container-fluid mb-2 w-100" style="min-height: 100vh; height: 99%; width: 100%">
-    <l-map ref="map" :max-zoom="maxZoom" :options="{ zoomSnap: 0.1 }" :bounds="bounds" @ready="onReady">
-      <l-geo-json class="district-border" :geojson="require(`../assets/districtsOutline.geojson`)"></l-geo-json>
-      <l-tile-layer
-        :url="url"
-        :attribution="attribution"
-      ></l-tile-layer>
+  <div
+    class="container-fluid mb-2 w-100"
+    style="min-height: 100vh; height: 99%; width: 100%"
+  >
+    <l-map
+      ref="map"
+      :max-zoom="maxZoom"
+      :options="{ zoomSnap: 0.1 }"
+      :bounds="bounds"
+      @ready="onReady"
+    >
+      <l-geo-json
+        class="district-border"
+        :geojson="require(`../assets/districtsOutline.geojson`)"
+      ></l-geo-json>
+      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <l-feature-group v-for="(table, index) in tables" :key="index">
         <l-marker :lat-lng="[table.location_lon, table.location_lat]">
           <l-icon>
@@ -14,7 +23,7 @@
               :ports="table.ports"
               :id="table.id"
               :isMapIcon="true"
-              :leftAligned="table.id==1"
+              :leftAligned="table.id == 1"
               :lat="table.location_lat"
               :lon="table.location_lon"
             />
@@ -62,14 +71,15 @@ export default {
     };
   },
 
-  async mounted() {
-   
-  },
+  async mounted() {},
 
   methods: {
     onReady() {
-      this.bounds = [[48.13, 16.1818304928183423], [48.34, 16.5775142432875313]]
-    }
+      this.bounds = [
+        [48.13, 16.1818304928183423],
+        [48.34, 16.5775142432875313],
+      ];
+    },
   },
 
   computed: {
@@ -88,8 +98,8 @@ export default {
       max.map((x) => (x *= 1.3));
 
       return [min, max];
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -5,12 +5,12 @@
         <Map :tables="tables" />
       </div>
       <div class="col-md-4">
-        <div class="container-fluid d-flex" v-for="table in tables" :key="table.id">
-          <TableCard
-            :id="table.id"
-            :ports="table.ports"
-            :name="table.name"
-          />
+        <div
+          class="container-fluid d-flex"
+          v-for="table in tables"
+          :key="table.id"
+        >
+          <TableCard :id="table.id" :ports="table.ports" :name="table.name" />
         </div>
       </div>
     </div>
