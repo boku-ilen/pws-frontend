@@ -12,7 +12,8 @@
       :qiPlugsFree="getFreePlugsByType('QI')"
       :usbPlugsFree="getFreePlugsByType('USB')"
       :batteryCharge="this.latest['battery_charge']"
-      :degrees="23"
+      :pvCharge="this.latest['energy_production']"
+      :degrees="degrees"
       :weatherState="weatherState"
     />
   </div>
@@ -36,6 +37,7 @@ export default {
       plugs: [],
       plugsFree: [],
       weatherState: String,
+      degrees: Number
     };
   },
 
@@ -47,9 +49,11 @@ export default {
     
     this.table = this.$store.getters.tablesById[this.table_type];
     this.latest = this.$store.getters.snapshots[this.table_type];
+    console.log(this.latest);
     this.plugsFree = this.$store.getters.snapshots[this.table_type]["port_usage"];
     this.plugs = this.$store.getters.tablesById[this.table_type]["ports"];
-    this.weatherState = this.$store.getters.weatherData[this.table_type];
+    this.weatherState = this.$store.getters.weatherData[this.table_type]["weatherState"];
+    this.degrees = this.$store.getters.weatherData[this.table_type]["temp"];
 
     // Count number of (free) ports
     for (const [id, discharge] of this.latest["port_usage"].entries()) {
@@ -73,7 +77,6 @@ export default {
 
   methods: {
     getFreePlugsByType(type) {
-      console.log(this.plugsFree[2]);
       let startingIndex = this.plugs.indexOf(type);
       let endingIndex = this.plugs.lastIndexOf(type);
       return this.plugsFree.slice(startingIndex, endingIndex + 1);

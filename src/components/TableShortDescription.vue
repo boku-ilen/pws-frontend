@@ -32,7 +32,7 @@ export default {
             weatherStatePaths: {
                 SUNNY: "sun.svg",
                 OVERCAST: "overcast.svg",
-                RAINY: "sun.svg",
+                RAINY: "rainy.svg",
             },
             weatherStateNames: {
                 SUNNY: "sonnig",

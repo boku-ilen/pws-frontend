@@ -78,7 +78,7 @@ export default {
     this.portUsage = table_snapshot.port_usage;      
     this.batteryCharge = table_snapshot.battery_charge;
     this.pvCharge = table_snapshot.energy_production;
-    this.weatherState = this.$store.getters.weatherData[this.id];
+    this.weatherState = this.$store.getters.weatherData[this.id]["weatherState"];
 
     this.resizeIcons()
 

@@ -2,6 +2,7 @@
     <div class="container-fluid justify-content-center mt-5 svg-container">
         <svg class="detail-svg" width="700" height="700">
             <image x="0" y="50" width="86%" height="85%" href="../assets/tableDetail.svg"/>
+            <image x="545" y="100" width="7%" :href="require(`../assets/${ this.getWeatherIcon }`)" />
             <!-- TOP ICONS -->
             <text y="40.5" transform="translate(171)" class="svgText">
                 <tspan x="0" text-anchor="middle">STROM</tspan>
@@ -69,6 +70,7 @@ export default {
     props: {
         weatherState: String,
         batteryCharge: Number,
+        pvCharge: Number,
         degrees: Number,
         usbPlugsFree: Array,
         qiPlugsFree: Array,
@@ -80,14 +82,17 @@ export default {
                 SUNNY: "sonnig",
                 OVERCAST: "bewölkt",
                 RAINY: "rainy",
+            },
+            weatherStatePaths: {
+                SUNNY: "sun.svg",
+                OVERCAST: "overcast.svg",
+                RAINY: "rainy.svg",
             }
         }
     },
 
     methods: {
         getUSBPortState(index) {
-            console.log(this.usbPlugsFree);
-            console.log(index);
             if(this.usbPlugsFree[index] == 0) {
                 return "besetzt"
             } else {
@@ -105,7 +110,13 @@ export default {
 
     computed: {
         isCharging() {
-            return true;
+            // FIXME: Change to a realistic number
+            console.log(this.pvCharge);
+            return this.pvCharge > 5;
+        },
+        getWeatherIcon() {
+            let weatherIconPath = this.weatherStatePaths[this.weatherState];
+            return weatherIconPath;
         },
     }
 }
