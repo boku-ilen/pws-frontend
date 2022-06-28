@@ -40,7 +40,7 @@ export default {
     await this.$store.dispatch("loadTables");
     await this.$store.dispatch("loadSnapshots");
     // FIXME: make this production ready
-    await this.$store.dispatch("mockWeatherData");
+    await this.$store.dispatch("loadWeatherData");
     this.tables = this.$store.getters.tables;
   },
 };

@@ -111,7 +111,6 @@ export default {
     computed: {
         isCharging() {
             // FIXME: Change to a realistic number
-            console.log(this.pvCharge);
             return this.pvCharge > 5;
         },
         getWeatherIcon() {

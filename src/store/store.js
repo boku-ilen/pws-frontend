@@ -51,35 +51,40 @@ const store = createStore({
     },
     async loadWeatherData({ state }) {
       for(let i = 0; i < state.tables.length; i++) {
-        let id = state.tables[i]["id"]
+        let id = state.tables[i]["id"];
+        let lat = state.tables[i]["location_lat"];
+        let lon = state.tables[i]["location_lon"];
+
         // Weather
         let apiKey = "db1a2f091413e833154a6de21adb3076";
         let openweathermap_onecall = await fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lon}&lon=${this.lat}&exclude=hourly,daily&appid=${apiKey}&units=metric`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${lon}&lon=${lat}&exclude=hourly,daily&appid=${apiKey}&units=metric`
         );
         openweathermap_onecall = await openweathermap_onecall.json();
 
         let weatherID = openweathermap_onecall["current"]["weather"][0]["id"];
         let degrees = openweathermap_onecall["current"]["temp"];
         let roughWeatherState = weatherID.toString()[0];
+        let weatherStateString
 
         // https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
         if (roughWeatherState < 7) {
-          roughWeatherState = "RAINY";
+          weatherStateString = "RAINY";
         } else if (roughWeatherState == 7) {
-          roughWeatherState = "OVERCAST";
+          weatherStateString = "OVERCAST";
         } else {
           if (weatherID > 800) {
-            roughWeatherState = "OVERCAST";
+            weatherStateString = "OVERCAST";
           } else {
-            roughWeatherState = "SUNNY";
+            weatherStateString = "SUNNY";
           }
         }
 
-        state.weatherData[id] = { "temp": degrees, "weatherState": roughWeatherState }
+        state.weatherData[id] = { "temp": degrees, "weatherState": weatherStateString }
       }
     },
-    mockWeatherData({ state }) {
+    // Just a small mock
+    async _loadWeatherData({ state }) {
       state.weatherData[1] = { "temp": 27, weatherState: "SUNNY" };
       state.weatherData[2] = { "temp": 19, weatherState: "OVERCAST" };
     }

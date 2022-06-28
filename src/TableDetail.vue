@@ -45,11 +45,10 @@ export default {
     await this.$store.dispatch("loadTables");
     await this.$store.dispatch("loadSnapshots");
     // FIXME: make this production ready
-    await this.$store.dispatch("mockWeatherData");
+    await this.$store.dispatch("loadWeatherData");
     
     this.table = this.$store.getters.tablesById[this.table_type];
     this.latest = this.$store.getters.snapshots[this.table_type];
-    console.log(this.latest);
     this.plugsFree = this.$store.getters.snapshots[this.table_type]["port_usage"];
     this.plugs = this.$store.getters.tablesById[this.table_type]["ports"];
     this.weatherState = this.$store.getters.weatherData[this.table_type]["weatherState"];
